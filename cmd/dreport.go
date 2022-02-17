@@ -60,7 +60,7 @@ func sendGithubPRToFeishu() {
 		var feishuMessageContent = messenger.FeishuMessageContent{
 			messenger.FeishuMessageContentItem{
 				Tag:  "text",
-				Text: "\n[Repository] ",
+				Text: "[Repository] ",
 			},
 			messenger.FeishuMessageContentItem{
 				Tag:  "a",
@@ -90,6 +90,13 @@ func sendGithubPRToFeishu() {
 			}
 			msg.Content = append(msg.Content, feishuMessageContent)
 		}
+		// 收尾行
+		msg.Content = append(msg.Content, messenger.FeishuMessageContent{
+			messenger.FeishuMessageContentItem{
+				Tag:  "text",
+				Text: "\n",
+			},
+		})
 	}
 	messenger.GetFeishuMessenger().SendHyperTextMessage(msg)
 }
